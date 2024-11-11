@@ -42,16 +42,31 @@
                     let cocktailImage = data.drinks[0].strDrinkThumb;
                     $("#image").attr("src", cocktailImage)
 
-                    let cocktailIngredients = [];
-                    let ingredientAmount = [];
-                    let check = 0;
-                    let count = 0;
-                    while(check != null){
-                        if(data.drinks[0].strIngredients+count== null){
-                            cocktailIngredients[count] = data.drinks[0].strIngredients[count];
-                            console.log(cocktailIngredisents[count]);
+                    // while(check != null){
+                    //     if(data.drinks[0].strIngredients+count== null){
+                    //         cocktailIngredients[count] = data.drinks[0].strIngredients[count];
+                    //         console.log(cocktailIngredisents[count]);
+                    //     }
+                    // }
+                    let randomDrink = data.drinks[0];
+                    for(let i=1; i <= 15; i++){
+                        if(randomDrink["strIngredient" + i] === null && randomDrink["strMeasure" + i] === null){
+                            break;
                         }
+                        let tbr = $("<tr></tr>");
+                        let mTd = $("<td></td>");
+                        let iTd = $("<td></td>");
+
+                        iTd.text(randomDrink["strIngredient" + i]);
+                        mTd.text(randomDrink["strMeasure"+i]);
+
+                        tbr.append(iTd);
+                        tbr.append(mTd);
+                        tb.append(tbr);
+
                     }
+
+                    table.append(tb);
                 })
         });
     </script>
